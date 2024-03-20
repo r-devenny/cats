@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+
+<body>
+    <div>
+        <img src="{% static 'images/cats_with_fire.jpg' %}"
+             alt="Picture of Cat" />
+    </div>
+
+    <div>
+     <h1>
+        All the {% if cats.count == 1 %} Cat {% else %} Cats {% endif %} are:
+     </h1>
+
+     <ul>
+     {% for cat in cats %}
+        <li>{{ cat.name }}</li>
+     {% endfor %}
+     </ul>
+    </div>
+        
+    <a href="/cats/">Back to Homepage</a>
+</body>
+
+
+
+</html>

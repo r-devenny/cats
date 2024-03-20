@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+{% load staticfiles %}
+
+<html>
+
+<body>
+    <div>
+        <img src="{% static 'images/cat.png' %}"
+             alt="Picture of Cat" />
+    </div>
+
+    <div>
+        <h1>
+            The {% if students.count == 1 %} Student {% else %} Students {% endif %} and their {% if cats.count == 1 %} Cat {% else %} Cats {% endif %} are:
+        </h1>
+
+        <ul>
+        {% for student in students %}
+            <li>{{ student.first_name }} {{ student.last_name }} has <strong>{{ student.cats }}</strong> {% if student.cats == 1 %} Cat {% else %} Cats {% endif %}</li>
+
+            <ul>
+                {% for cat in cats %}
+                    
+                    {% if cat.student == student %}    
+                        <li>{{ cat.name }}</li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+
+        {% endfor %}
+        </ul>
+    </div>
+        
+    <a href="/cats/about/">Learn About The Cats</a>
+</body>
+
+
+
+</html>
