@@ -26,3 +26,16 @@ class Cat(models.Model):
     
     class Meta:
         verbose_name_plural = "Cats"
+
+    def save(self, *args, **kwargs):
+        # If this is a new cat, increment the cat count for the student
+        if not self.pk:
+            self.student.cats += 1
+            self.student.save()
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):
+        # Decrement the cat count for the student when a cat is deleted
+        self.student.cats -= 1
+        self.student.save()
+        super().delete(*args, **kwargs)
